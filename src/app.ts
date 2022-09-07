@@ -2,7 +2,7 @@ class Department {
   constructor(
     private name: string,
     private readonly id: string,
-    private employees: string[] = []
+    protected employees: string[] = [] // protected like private but subclasses can use
   ) {}
 
   describe(this: Department): void {
@@ -30,6 +30,15 @@ class AccountingDepartment extends Department {
     super('Accounting', id)
   }
 
+  addEmployee(name: string): void {
+    // override parent class
+    if (name === 'Max') {
+      return
+    }
+
+    this.employees.push(name)
+  }
+
   addReport(text: string) {
     this.reports.push(text)
   }
@@ -51,3 +60,9 @@ const accounting = new AccountingDepartment('3', [])
 
 accounting.addReport('Something went wrong...')
 accounting.printReports()
+
+accounting.addEmployee('Max')
+accounting.addEmployee('Manuel')
+
+accounting.printReports()
+accounting.printEmployeeInformation()

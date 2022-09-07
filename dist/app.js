@@ -1,6 +1,7 @@
 "use strict";
 class Department {
-    constructor(name, id, employees = []) {
+    constructor(name, id, employees = [] // protected like private but subclasses can use
+    ) {
         this.name = name;
         this.id = id;
         this.employees = employees;
@@ -27,6 +28,13 @@ class AccountingDepartment extends Department {
         super('Accounting', id);
         this.reports = reports;
     }
+    addEmployee(name) {
+        // override parent class
+        if (name === 'Max') {
+            return;
+        }
+        this.employees.push(name);
+    }
     addReport(text) {
         this.reports.push(text);
     }
@@ -42,3 +50,7 @@ it.printEmployeeInformation();
 const accounting = new AccountingDepartment('3', []);
 accounting.addReport('Something went wrong...');
 accounting.printReports();
+accounting.addEmployee('Max');
+accounting.addEmployee('Manuel');
+accounting.printReports();
+accounting.printEmployeeInformation();
