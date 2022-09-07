@@ -1,11 +1,12 @@
 "use strict";
 class Department {
-    constructor(name, employees = []) {
+    constructor(name, id, employees = []) {
         this.name = name;
+        this.id = id;
         this.employees = employees;
     }
     describe() {
-        console.log(`Department Name: ${this.name}`);
+        console.log(`Department (${this.id}): ${this.name}`);
     }
     addEmployee(employee) {
         this.employees.push(employee);
@@ -15,8 +16,29 @@ class Department {
         console.log(this.employees);
     }
 }
-const accounting = new Department('Accounting');
-accounting.addEmployee('Max');
-accounting.addEmployee('Manu');
-accounting.describe();
-accounting.printEmployeeInformation();
+class ITDeparment extends Department {
+    constructor(id, admins) {
+        super('IT', id);
+        this.admins = admins;
+    }
+}
+class AccountingDepartment extends Department {
+    constructor(id, reports) {
+        super('Accounting', id);
+        this.reports = reports;
+    }
+    addReport(text) {
+        this.reports.push(text);
+    }
+    printReports() {
+        console.log(this.reports);
+    }
+}
+const it = new ITDeparment('1', ['Max']);
+it.addEmployee('Max');
+it.addEmployee('Manu');
+it.describe();
+it.printEmployeeInformation();
+const accounting = new AccountingDepartment('3', []);
+accounting.addReport('Something went wrong...');
+accounting.printReports();
