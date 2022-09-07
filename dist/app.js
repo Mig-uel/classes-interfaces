@@ -43,6 +43,13 @@ class AccountingDepartment extends Department {
             throw new Error('Please pass in a valid value!');
         this.addReport(value);
     }
+    static getInstance() {
+        if (this.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment('5', []);
+        return this.instance;
+    }
     addEmployee(name) {
         // override parent class
         if (name === 'Max') {
@@ -58,7 +65,7 @@ class AccountingDepartment extends Department {
         console.log(this.reports);
     }
     describe() {
-        console.log('Accouting Deparment - ID:' + this.id);
+        console.log('Accounting Department - ID:' + this.id);
     }
 }
 const it = new ITDeparment('1', ['Max']);
@@ -66,7 +73,8 @@ it.addEmployee('Max');
 it.addEmployee('Manu');
 it.describe();
 it.printEmployeeInformation();
-const accounting = new AccountingDepartment('3', []);
+// const accounting = new AccountingDepartment('3', [])
+const accounting = AccountingDepartment.getInstance();
 accounting.mostRecentReport = 'Year End Report';
 accounting.addReport('Something went wrong...');
 console.log(accounting.mostRecentReport);
