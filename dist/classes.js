@@ -1,7 +1,6 @@
 "use strict";
 class Department {
-    constructor(name, id, employees = [] // protected like private but subclasses can use
-    ) {
+    constructor(name, id, employees = []) {
         this.name = name;
         this.id = id;
         this.employees = employees;
@@ -51,7 +50,6 @@ class AccountingDepartment extends Department {
         return this.instance;
     }
     addEmployee(name) {
-        // override parent class
         if (name === 'Max') {
             return;
         }
@@ -73,13 +71,10 @@ it.addEmployee('Max');
 it.addEmployee('Manu');
 it.describe();
 it.printEmployeeInformation();
-// const accounting = new AccountingDepartment('3', [])
 const accounting = AccountingDepartment.getInstance();
 accounting.mostRecentReport = 'Year End Report';
 accounting.addReport('Something went wrong...');
 console.log(accounting.mostRecentReport);
 accounting.addEmployee('Max');
 accounting.addEmployee('Manuel');
-// accounting.printReports()
-// accounting.printEmployeeInformation()
 accounting.describe();
