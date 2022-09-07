@@ -1,4 +1,8 @@
 "use strict";
+// Function Type
+// type AddFn = (a: number, b: number) => number
+let add;
+add = (n1, n2) => n1 + n2;
 class Person {
     constructor(name) {
         this.name = name;
