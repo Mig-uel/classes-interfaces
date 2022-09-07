@@ -1,14 +1,17 @@
-interface Greetable {
+interface Named {
+  readonly name: string
+}
+
+interface Greetable extends Named {
   // how an object should look like | custom type
   // share functionality among different classes
-  readonly name: string
-
   greet: (phrase: string) => void
 } // used to type check an object that must have specific structure
 
 class Person implements Greetable {
   // can implement multiple interfaces
   private age = 30
+
   constructor(readonly name: string) {}
 
   greet(phrase: string) {
